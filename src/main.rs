@@ -1,6 +1,8 @@
 use log::error;
 use std::env;
 
+mod tcp_server;
+
 fn main() {
     if env::var_os("RUST_LOG").is_none() {
         env::set_var("RUST_LOG", "debug");
@@ -22,7 +24,7 @@ fn main() {
 
     match protocol {
         "tcp" => match role {
-            "server" => todo!(),
+            "server" => tcp_server::serve(address).unwrap_or_else(|e| error!("{}", e)),
             "client" => todo!(),
             _ => missing_role(),
         },

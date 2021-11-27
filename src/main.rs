@@ -24,15 +24,21 @@ fn main() {
         "tcp" => match role {
             "server" => todo!(),
             "client" => todo!(),
-            _ => todo!(),
+            _ => missing_role(),
         },
         "udp" => match role {
             "server" => todo!(),
             "client" => todo!(),
-            _ => todo!(),
+            _ => missing_role(),
         },
         _ => {
-            todo!()
+            error!("Please specify tcp or udp on the 1st argument.");
+            std::process::exit(1);
         }
     }
+}
+
+fn missing_role() {
+    error!("Please specify server or client on the 2nd argument.");
+    std::process::exit(1);
 }
